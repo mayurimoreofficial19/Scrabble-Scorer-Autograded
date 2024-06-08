@@ -15,7 +15,7 @@ const oldPointStructure = {
 };
 
 function oldScrabbleScorer(word) {
-  word = word.toUpperCase();
+  word = word.toLowerCase();
   let letterPoints = "";
 
   for (let i = 0; i < word.length; i++) {
@@ -39,7 +39,7 @@ function initialPrompt() {
 let newPointStructure = transform(oldPointStructure);
 
 let simpleScorer = function (word) {
-  word = word.toUpperCase();
+  word = word.toLowerCase();
   let numericalScore = 0;
 
   for (let Index = 0; Index < word.length; Index++) {
@@ -50,21 +50,21 @@ let simpleScorer = function (word) {
 };
 
 let vowelBonusScorer = function (word) {
-  word = word.toUpperCase();
+  word = word.toLowerCase();
   let numericalScore = 0;
 
   for (let Index = 0; Index < word.length; Index++) {
     if (
-      word[Index] == "A" ||
-      word[Index] == "E" ||
-      word[Index] == "I" ||
-      word[Index] == "U" ||
-      word[Index] == "O"
+      word[Index].toUpperCase() == "A" ||
+      word[Index].toUpperCase() == "E" ||
+      word[Index].toUpperCase() == "I" ||
+      word[Index].toUpperCase() == "U" ||
+      word[Index].toUpperCase() == "O"
     ) {
       numericalScore += 3;
     }
 
-    let letters = word.charAt(Index);
+    let letters = word.charAt(Index).toUpperCase();
     if (letters >= "A" && letters <= "Z" && !"AEIOU".includes(letters)) {
       numericalScore += 1;
     }
@@ -74,11 +74,11 @@ let vowelBonusScorer = function (word) {
 };
 
 let scrabbleScorer = function (word) {
-  word = word.toUpperCase();
+  word = word.toLowerCase();
   let score = 0;
   for (let keys in newPointStructure) {
     for (let Index = 0; Index < word.length; Index++) {
-      if (keys.includes(word[Index].toLowerCase())) {
+      if (keys.includes(word[Index])) {
         score += Number(newPointStructure[keys]);
       }
     }
