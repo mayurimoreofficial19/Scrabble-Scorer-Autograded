@@ -110,9 +110,6 @@ function scorerPrompt() {
 
   return scoringAlgorithms;
 }
-// console.log(
-//   `\nScrabble Score for ${userInput.toLowerCase()} : ${numericalScore}\n`
-// );
 
 function transform(oldPointStructureObj) {
   let newPointStructureObject = {};
@@ -137,11 +134,7 @@ function transform(oldPointStructureObj) {
 
 function runProgram() {
   initialPrompt();
-  // console.log(oldScrabbleScorer(userInput));
-  // console.log(simpleScorer(userInput));
-  // console.log(vowelBonusScorer(userInput));
   scorerPrompt();
-  //scrabbleScorer(userInput);
 }
 
 // Don't write any code below this line //
