@@ -97,6 +97,7 @@ const scoringAlgorithms = [simpleScore, bonusVowel, scrabble];
 
 function scorerPrompt() {
   console.log(" Which scoring algorithm would you like to use?\n");
+  //  let option = 'Y';
 
   for (let index = 0; index < scoringAlgorithms.length; index++) {
     console.log(
@@ -104,9 +105,24 @@ function scorerPrompt() {
     );
   }
   let selectOption = input.question("Enter 0, 1 or 2 : ");
+
+  while (selectOption > 2 || isNaN(selectOption)) {
+    selectOption = input.question("Enter 0, 1 or 2 : ");
+  }
+
   let scoringFunction = scoringAlgorithms[selectOption].scoringFunction;
   let score = scoringFunction(userInput);
-  console.log(`\nScore for '${userInput.toLowerCase()}' : ${score}\n`);
+
+  console.log(`\nScore for '${userInput}' : ${score}\n`);
+
+  let option = input.question("Would you like to score another word (Y/N)? : ");
+
+  if (option.toLowerCase() === "y") {
+    initialPrompt();
+    scorerPrompt();
+  } else {
+    console.log("\nThank you for playing!\n");
+  }
 
   return scoringAlgorithms;
 }
