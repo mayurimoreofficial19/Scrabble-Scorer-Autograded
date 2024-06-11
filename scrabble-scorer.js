@@ -2,7 +2,6 @@
 
 const input = require("readline-sync");
 let userInput = "";
-//let numericalScore = 0;
 
 const oldPointStructure = {
   1: ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
@@ -42,34 +41,24 @@ let simpleScorer = function (word) {
   word = word.toLowerCase();
   let numericalScore = 0;
 
-  for (let Index = 0; Index < word.length; Index++) {
+  for (let index = 0; index < word.length; index++) {
     numericalScore += 1;
   }
-  console.log(`\nScore for '${word}' : ${numericalScore}`);
   return numericalScore;
 };
 
 let vowelBonusScorer = function (word) {
   word = word.toLowerCase();
+  let vowel = "aeiou";
   let numericalScore = 0;
 
-  for (let Index = 0; Index < word.length; Index++) {
-    if (
-      word[Index].toUpperCase() == "A" ||
-      word[Index].toUpperCase() == "E" ||
-      word[Index].toUpperCase() == "I" ||
-      word[Index].toUpperCase() == "U" ||
-      word[Index].toUpperCase() == "O"
-    ) {
+  for (let index = 0; index < word.length; index++) {
+    if (vowel.includes(word[index])) {
       numericalScore += 3;
-    }
-
-    let letters = word.charAt(Index).toUpperCase();
-    if (letters >= "A" && letters <= "Z" && !"AEIOU".includes(letters)) {
+    } else if (word.charAt(index) >= "a" && word.charAt(index) <= "z") {
       numericalScore += 1;
     }
   }
-  console.log(`\nScore for '${word}' : ${numericalScore}`);
   return numericalScore;
 };
 
@@ -77,15 +66,15 @@ let scrabbleScorer = function (word) {
   word = word.toLowerCase();
   let score = 0;
   for (let keys in newPointStructure) {
-    for (let Index = 0; Index < word.length; Index++) {
-      if (keys.includes(word[Index])) {
+    for (let index = 0; index < word.length; index++) {
+      if (keys.includes(word[index])) {
         score += Number(newPointStructure[keys]);
       }
     }
   }
-  console.log(`\nScrabble Score for ${word} : ${score}`);
   return score;
 };
+//`\nScrabble Score for '${userInput.toLowerCase()}' : ${score}\n`;
 
 let simpleScore = {
   name: "Simple Score",
@@ -110,19 +99,21 @@ const scoringAlgorithms = [simpleScore, bonusVowel, scrabble];
 function scorerPrompt() {
   console.log(" Which scoring algorithm would you like to use?\n");
 
-  for (let Index = 0; Index < scoringAlgorithms.length; Index++) {
+  for (let index = 0; index < scoringAlgorithms.length; index++) {
     console.log(
-      `${Index} - ${scoringAlgorithms[Index].name} : ${scoringAlgorithms[Index].description}`
+      `${index} - ${scoringAlgorithms[index].name} : ${scoringAlgorithms[index].description}`
     );
-    //console.log(`Scoring Function Result : ${scoringAlgorithms[Index].scoringFunction}`);
   }
   let selectOption = input.question("Enter 0, 1 or 2 : ");
   let scoringFunction = scoringAlgorithms[selectOption].scoringFunction;
   let score = scoringFunction(userInput);
-  console.log(score);
+  console.log(`\nScrabble Score for '${userInput.toLowerCase()}' : ${score}\n`);
 
   return scoringAlgorithms;
 }
+// console.log(
+//   `\nScrabble Score for ${userInput.toLowerCase()} : ${numericalScore}\n`
+// );
 
 function transform(oldPointStructureObj) {
   let newPointStructureObject = {};
@@ -135,17 +126,12 @@ function transform(oldPointStructureObj) {
   for (let keys in oldPointStructureObj) {
     newPointStructureLetterArr = oldPointStructureObj[keys];
 
-    for (let Index = 0; Index < newPointStructureLetterArr.length; Index++) {
-      key = newPointStructureLetterArr[Index].toLowerCase();
+    for (let index = 0; index < newPointStructureLetterArr.length; index++) {
+      key = newPointStructureLetterArr[index].toLowerCase();
       value = Number(keys);
       newPointStructureObject[key] = value;
     }
   }
-
-  // for (let keys in oldPointStructureObj) {
-  //   let value = oldPointStructureObj[keys];
-  //   newPointStructureObject[value] = Number(keys);
-  // }
 
   return newPointStructureObject;
 }
