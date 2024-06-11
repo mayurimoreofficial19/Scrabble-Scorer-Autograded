@@ -74,7 +74,6 @@ let scrabbleScorer = function (word) {
   }
   return score;
 };
-//`\nScrabble Score for '${userInput.toLowerCase()}' : ${score}\n`;
 
 let simpleScore = {
   name: "Simple Score",
@@ -107,7 +106,7 @@ function scorerPrompt() {
   let selectOption = input.question("Enter 0, 1 or 2 : ");
   let scoringFunction = scoringAlgorithms[selectOption].scoringFunction;
   let score = scoringFunction(userInput);
-  console.log(`\nScrabble Score for '${userInput.toLowerCase()}' : ${score}\n`);
+  console.log(`\nScore for '${userInput.toLowerCase()}' : ${score}\n`);
 
   return scoringAlgorithms;
 }
