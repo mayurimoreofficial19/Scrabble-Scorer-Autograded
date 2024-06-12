@@ -33,6 +33,10 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
   console.log("\nLet's play some scrabble! \n");
   userInput = input.question("Enter a word to score: ");
+
+  while (!isNaN(userInput)) {
+    userInput = input.question("Enter a word to score: ");
+  }
 }
 
 let newPointStructure = transform(oldPointStructure);
@@ -106,7 +110,7 @@ function scorerPrompt() {
   }
   let selectOption = input.question("Enter 0, 1 or 2 : ");
 
-  while (selectOption > 2 || isNaN(selectOption)) {
+  while (selectOption > 2 || isNaN(selectOption) || selectOption <= 0) {
     selectOption = input.question("Enter 0, 1 or 2 : ");
   }
 
