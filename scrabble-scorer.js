@@ -110,7 +110,7 @@ function scorerPrompt() {
   }
   let selectOption = input.question("Enter 0, 1 or 2 : ");
 
-  while (selectOption > 2 || isNaN(selectOption) || selectOption <= 0) {
+  while (selectOption > 2 || isNaN(selectOption) || selectOption < 0) {
     selectOption = input.question("Enter 0, 1 or 2 : ");
   }
 
